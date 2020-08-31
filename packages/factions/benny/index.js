@@ -15,7 +15,7 @@ let clothes = mp.colshapes.newSphere(-348.1573486328125, -121.38956451416016, 39
 
 mp.events.add("PushE", (player) => {
     if (mp.players.exists(player)) {
-        if (player.data.faction == "bennys") {   
+        if (player.data.faction == "Bennys") {   
              if(pc.isPointWithin(player.position) && player.data.mainmenu == false) {
                     player.call("client:bennys:createOfficeComputer",[player.data.factionrang]);
                     player.data.mainmenu = true;    
