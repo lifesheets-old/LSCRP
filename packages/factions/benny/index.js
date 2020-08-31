@@ -9,9 +9,9 @@ mp.events.add("F7", (player) => {
   }
 });
 
-let pc = mp.colshapes.newSphere(-351.0594177246094, -129.4771270751953, 39.009212493896484, 2, 0);
-let duty = mp.colshapes.newSphere(-352.3919372558594, -131.80238342285156, 39.00962829589844, 2, 0); //ckeck
-let clothes = mp.colshapes.newSphere(-348.1573486328125, -121.38956451416016, 39.009639739990234, 2, 0);
+let pc = mp.colshapes.newSphere(-200.13136291503906, -1316.1090087890625, 31.0893497467041, 2, 0);
+let duty = mp.colshapes.newSphere(-195.85630798339844, -1320.6153564453125, 31.0893497467041, 2, 0); //ckeck
+let clothes = mp.colshapes.newSphere(-196.6136016845703, -1315.67919921875, 31.0893497467041, 2, 0);
 
 mp.events.add("PushE", (player) => {
     if (mp.players.exists(player)) {
@@ -22,7 +22,7 @@ mp.events.add("PushE", (player) => {
                 }else if(duty.isPointWithin(player.position) && player.data.mainmenu == false) {
                     mp.events.call("server:faction:duty", player);
                 }else if(clothes.isPointWithin(player.position) && player.data.mainmenu == false) {
-                    player.call("client:lsc:clothes");
+                    player.call("client:bennys:clothes");
                     player.data.mainmenu = true
             }
         }      
