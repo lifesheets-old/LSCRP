@@ -124,7 +124,7 @@ mp.events.add("client:playermenu:mainMenu", (admin,ergeben,first,last,gang,gangr
     main.AddItem(new UIMenuItem("Schlüsselverwaltung","Alle Schlüssel die du besitzt"));
     main.AddItem(new UIMenuItem("Ergeben","Ergebe dich"));
     main.AddItem(new UIMenuItem("Fahrzeugpapiere","Deine Fahrzeugpapiere"));
-    main.AddItem(new UIMenuItem("Gangverwaltung","Verwalte die Gang: "+gang));  
+    //main.AddItem(new UIMenuItem("Gangverwaltung","Verwalte die Gang: "+gang));  
     //main.AddItem(new UIMenuItem("Adventskalender","Öffne jeden Tag ein Törchen"));  
    }
    if (ergeben == 1) {

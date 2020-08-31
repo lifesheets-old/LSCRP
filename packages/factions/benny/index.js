@@ -2,7 +2,7 @@ let tune = mp.colshapes.newSphere(-214.548126, -1321.87829, 30.890388, 20, 0);
 mp.events.add("F7", (player) => {
   if (mp.players.exists(player)) {
     if(tune.isPointWithin(player.position)) {
-        if (player.data.faction == "LSC") {
+        if (player.data.faction == "Bennys") {
            player.call("client:tuning:openTuningMenu");
         }        
     }    
@@ -15,9 +15,9 @@ let clothes = mp.colshapes.newSphere(-348.1573486328125, -121.38956451416016, 39
 
 mp.events.add("PushE", (player) => {
     if (mp.players.exists(player)) {
-        if (player.data.faction == "LSC") {   
+        if (player.data.faction == "bennys") {   
              if(pc.isPointWithin(player.position) && player.data.mainmenu == false) {
-                    player.call("client:lsc:createOfficeComputer",[player.data.factionrang]);
+                    player.call("client:bennys:createOfficeComputer",[player.data.factionrang]);
                     player.data.mainmenu = true;    
                 }else if(duty.isPointWithin(player.position) && player.data.mainmenu == false) {
                     mp.events.call("server:faction:duty", player);
@@ -30,7 +30,7 @@ mp.events.add("PushE", (player) => {
   });
 
 
-  mp.events.add("server:lsc:clothes", (player,name) => {
+  mp.events.add("server:bennys:clothes", (player,name) => {
     if (name == "Azubi-Klamotten") {                
         gm.mysql.handle.query("UPDATE characters SET factioncloth = 'Azubi-Klamotten' WHERE id = ?", [player.data.charId], function(err,res) {
             if (err) console.log("Error in Update Faction Clothes: "+err);
@@ -171,7 +171,7 @@ mp.events.add("PushE", (player) => {
 });
 
 
-mp.events.add("server:lsc:mainMenu", (player,slot) => {
+mp.events.add("server:bennys:mainMenu", (player,slot) => {
     getNearestPlayer(player, 2);   
         if(slot == "Dienstausweis zeigen")
 	{
@@ -194,13 +194,13 @@ mp.events.add("server:lsc:mainMenu", (player,slot) => {
 	else if(slot == "Mitarbeiterverwaltung")
 	{
         if (mp.players.exists(player)) {
-            player.call("client:lsc:closeMainMenu");
-		    player.call("client:lsc:openMemberMenu");
+            player.call("client:bennys:closeMainMenu");
+		    player.call("client:bennys:openMemberMenu");
         }       
     }
     else if (slot == "Dispatches") {
         if(mp.players.exists(player)) {
-            gm.mysql.handle.query("SELECT * FROM faction_dispatches WHERE faction = 'LSC' AND active = 'Y'", [], function(err, res) {
+            gm.mysql.handle.query("SELECT * FROM faction_dispatches WHERE faction = 'Bennys' AND active = 'Y'", [], function(err, res) {
               if (err) console.log("ERROR in Select Dispatches: "+err);
                   if (res.length > 0) {
                       var i = 1;
@@ -210,12 +210,12 @@ mp.events.add("server:lsc:mainMenu", (player,slot) => {
                           DisList.push(obj);
         
                           if (parseInt(i) == parseInt(res.length)) {
-                              if(mp.players.exists(player)) player.call("client:lsc:dispatchvewer", [JSON.stringify(DisList)]);
+                              if(mp.players.exists(player)) player.call("client:bennys:dispatchvewer", [JSON.stringify(DisList)]);
                           }
                           i++;
                       });
                   } else {
-                      if(mp.players.exists(player)) player.call("client:lsc:dispatchvewer", ["none"]);
+                      if(mp.players.exists(player)) player.call("client:bennys:dispatchvewer", ["none"]);
                   }
               });
           }
@@ -280,25 +280,25 @@ mp.events.add("server:lsc:mainMenu", (player,slot) => {
 	
 });
 
-mp.events.add("server:lsc:mark", (player, id) => {
+mp.events.add("server:bennys:mark", (player, id) => {
     if (mp.players.exists(player)) {
         gm.mysql.handle.query("SELECT posx,posy FROM faction_dispatches WHERE id = ?", [id], function(err,res) {
             if(err) console.log("Error in Select Dispatch: "+err);
-            player.call("client:lsc:markdispatch", [res[0].posx, res[0].posy])
+            player.call("client:bennys:markdispatch", [res[0].posx, res[0].posy])
           });
     }    
   });
   
-  mp.events.add("server:lsc:deletedispatch", (player, id) => {
+  mp.events.add("server:bennys:deletedispatch", (player, id) => {
     gm.mysql.handle.query("UPDATE faction_dispatches SET active = 'N' WHERE id = ?", [id], function (err,res) {
       if(err) console.log("Error in Update Dispatch: "+err);
     });
   });
-mp.events.add("server:lsc:entlassen", (player,itemText) => {
+mp.events.add("server:bennys:entlassen", (player,itemText) => {
     if (mp.players.exists(player)) {
         getNearestPlayer(player, 2);   
         if (mp.players.exists(currentTarget)) {
-            if (currentTarget.data.faction == "LSC") {
+            if (currentTarget.data.faction == "Bennys") {
                 if(currentTarget !== null) {        
                     currentTarget.notifyWithPicture("Auto Club Los Santos", "Entlassung", "Deine Anstellung wurde beendet","CHAR_CALL911");
                     currentTarget.call("client:faction:delmarkers");
@@ -307,7 +307,7 @@ mp.events.add("server:lsc:entlassen", (player,itemText) => {
                     currentTarget.data.factionDuty = 0;
                     currentTarget.data.factionrang = 0;
                     gm.mysql.handle.query("UPDATE characters SET faction = ?, duty = ?, factionrang = ?, factioncloth = 'Zivil' WHERE id = ?", [currentTarget.data.faction, currentTarget.data.factionDuty,currentTarget.data.factionrang,currentTarget.data.charId], function(err12, ress12) {
-                        if(err12) console.log("Error in LSC Dismiss Member");
+                        if(err12) console.log("Error in Bennys Dismiss Member");
                     });
                     gm.mysql.handle.query("SELECT * FROM characters WHERE id = ?",[currentTarget.data.charId], function(err5,res5) {
                         if (err5) console.log("Error in Select Character: "+err5);
@@ -368,12 +368,12 @@ mp.events.add("server:lsc:entlassen", (player,itemText) => {
 });
 
 
-mp.events.add("server:lsc:befördern", (player,rank) => {
+mp.events.add("server:bennys:befördern", (player,rank) => {
     if (mp.players.exists(player)) {
         getNearestPlayer(player,2);
         if (mp.players.exists(currentTarget)) {
             if (currentTarget !== null) {
-                if (currentTarget.data.faction == "LSC") {
+                if (currentTarget.data.faction == "Bennys") {
                     gm.mysql.handle.query("UPDATE characters SET factionrang = ? WHERE id = ?", [rank,currentTarget.data.charId], function (err,res) {
                         if (err) console.log("Error in Update Character Factionrank: "+err);
                         player.notify("~g~Die Person wurde auf "+rank+" gesetzt");
@@ -381,7 +381,7 @@ mp.events.add("server:lsc:befördern", (player,rank) => {
                         currentTarget.data.factionrang = rank;                    
                     });
                 } else {
-                    player.notify("~r~Die Person ist nicht im LSC");
+                    player.notify("~r~Die Person ist nicht im Bennys");
                 }
             } else {
                 player.notify("~r~Keiner in deiner Nähe");
@@ -391,9 +391,9 @@ mp.events.add("server:lsc:befördern", (player,rank) => {
 });
 
 
-mp.events.add("server:lsc:mitarbeiter",(player) => {
-    gm.mysql.handle.query("SELECT firstname,lastname,factionrang,id FROM characters WHERE faction = 'LSC'",[],function(err,res) {
-        if (err) console.log("Error in Select LSC Characters: "+err);
+mp.events.add("server:bennys:mitarbeiter",(player) => {
+    gm.mysql.handle.query("SELECT firstname,lastname,factionrang,id FROM characters WHERE faction = 'Bennys'",[],function(err,res) {
+        if (err) console.log("Error in Select bennys Characters: "+err);
         if (res.length > 0) {
             var ACLSList = [];
             var i = 1;
@@ -401,17 +401,17 @@ mp.events.add("server:lsc:mitarbeiter",(player) => {
                 let obj = { "firstname": String(acls.firstname), "lastname": String(acls.lastname),"factionrang": String(acls.factionrang), "id": String(acls.id)};
                 ACLSList.push(obj);
                 if (parseInt(i) == parseInt(res.length)) {
-                    if (mp.players.exists(player)) player.call("client:lsc:Memberlist", [JSON.stringify(ACLSList)]);
+                    if (mp.players.exists(player)) player.call("client:bennys:Memberlist", [JSON.stringify(ACLSList)]);
                 }
                 i++;
             });
         } else {   
-            if (mp.players.exists(player)) player.notify("Es gibt keine LSC Beamten");
+            if (mp.players.exists(player)) player.notify("Es gibt keine bennys Beamten");
         }
      });
 });
 
-mp.events.add("server:lsc:mitarbeiter",(player,id) => {
+mp.events.add("server:bennys:mitarbeiter",(player,id) => {
     if (mp.players.exists(player)) {
         gm.mysql.handle.query("SELECT * FROM characters WHERE id = ?",[id],function(err,res) {
             if (err) console.log("Error in Select Kündigen Char: "+err);
@@ -492,7 +492,7 @@ mp.events.add("server:lsc:mitarbeiter",(player,id) => {
 
 
 
-mp.events.add("server:lsc:spawnVehicle",(player,type) => {
+mp.events.add("server:bennys:spawnVehicle",(player,type) => {
     const one = new mp.Vector3(934.93, -990.446, 38.149);
     const onehead = 93;
     const two = new mp.Vector3(956.839, -989.31, 40.166);
@@ -510,7 +510,7 @@ mp.events.add("server:lsc:spawnVehicle",(player,type) => {
                 }  else {
                 var veh = mp.vehicles.new(parseFloat(type), four, {
                     heading: fourhead,
-                    numberPlate: "lsc",
+                    numberPlate: "bennys",
                     locked: true,
                     engine: false,
                     dimension: 0
@@ -519,14 +519,14 @@ mp.events.add("server:lsc:spawnVehicle",(player,type) => {
                     if (mp.vehicles.exists(veh)) {
                         veh.setColorRGB(255,171,0,255,171,0);
                         player.notify("~g~Dein Fahrzeug steht auf Stellplatz 4");                
-                        veh.setVariable("faction", "lsc");
+                        veh.setVariable("faction", "bennys");
                         veh.setVariable("fuel",100);
                         veh.setVariable("fuelart","Diesel");
                         veh.setVariable("isDead","false");
                         veh.setVariable('Kilometer',0);
                         veh.setVariable("tanken","false");
                         veh.numberPlateType = 1;
-                        veh.numberPlate = "lsc";
+                        veh.numberPlate = "bennys";
                         veh.setMod(55, 2);
                         veh.setMod(18, 2);
                         veh.setMod(12, 2);
@@ -539,7 +539,7 @@ mp.events.add("server:lsc:spawnVehicle",(player,type) => {
             } else {
                 var veh = mp.vehicles.new(parseFloat(type), three, {
                     heading: threehead,
-                    numberPlate: "lsc",
+                    numberPlate: "bennys",
                     locked: true,
                     engine: false,
                     dimension: 0
@@ -548,14 +548,14 @@ mp.events.add("server:lsc:spawnVehicle",(player,type) => {
                     if (mp.vehicles.exists(veh)) {
                         veh.setColorRGB(255,171,0,255,171,0);
                         player.notify("~g~Dein Fahrzeug steht auf Stellplatz 3");                
-                        veh.setVariable("faction", "lsc");
+                        veh.setVariable("faction", "bennys");
                         veh.setVariable("fuel",100);
                         veh.setVariable("fuelart","Diesel");
                         veh.setVariable("isDead","false");
                         veh.setVariable('Kilometer',0);
                         veh.setVariable("tanken","false");
                         veh.numberPlateType = 1;
-                        veh.numberPlate = "lsc";
+                        veh.numberPlate = "bennysc";
                         veh.setMod(55, 2);
                         veh.setMod(18, 2);
                         veh.setMod(12, 2);
@@ -568,7 +568,7 @@ mp.events.add("server:lsc:spawnVehicle",(player,type) => {
         } else {
             var veh = mp.vehicles.new(parseFloat(type), two, {
                 heading: twohead,
-                numberPlate: "lsc",
+                numberPlate: "bennys",
                 locked: true,
                 engine: false,
                 dimension: 0
@@ -577,14 +577,14 @@ mp.events.add("server:lsc:spawnVehicle",(player,type) => {
                 if (mp.vehicles.exists(veh)) {
                     veh.setColorRGB(255,171,0,255,171,0);
                     player.notify("~g~Dein Fahrzeug steht auf Stellplatz 2");                
-                    veh.setVariable("faction", "lsc");
+                    veh.setVariable("faction", "bennys");
                     veh.setVariable("fuel",100);
                     veh.setVariable("fuelart","Diesel");
                     veh.setVariable("isDead","false");
                     veh.setVariable('Kilometer',0);
                     veh.setVariable("tanken","false");
                     veh.numberPlateType = 1;
-                    veh.numberPlate = "lsc";
+                    veh.numberPlate = "bennys";
                     veh.setMod(55, 2);
                     veh.setMod(18, 2);
                     veh.setMod(12, 2);
@@ -597,7 +597,7 @@ mp.events.add("server:lsc:spawnVehicle",(player,type) => {
     } else {
         var veh = mp.vehicles.new(parseFloat(type), one, {
             heading: onehead,
-            numberPlate: "lsc",
+            numberPlate: "bennys",
             locked: true,
             engine: false,
             dimension: 0
@@ -606,14 +606,14 @@ mp.events.add("server:lsc:spawnVehicle",(player,type) => {
             if (mp.vehicles.exists(veh)) {
                 veh.setColorRGB(255,171,0,255,171,0);
                 player.notify("~g~Dein Fahrzeug steht auf Stellplatz 1");                
-                veh.setVariable("faction", "lsc");
+                veh.setVariable("faction", "bennys");
                 veh.setVariable("fuel",100);
                 veh.setVariable("fuelart","Diesel");
                 veh.setVariable("isDead","false");
                 veh.setVariable('Kilometer',0);
                 veh.setVariable("tanken","false");
                 veh.numberPlateType = 1;
-                veh.numberPlate = "lsc";
+                veh.numberPlate = "bennys";
                 veh.setMod(55, 2);
                 veh.setMod(18, 2);
                 veh.setMod(12, 2);
@@ -629,20 +629,20 @@ mp.events.add("server:lsc:spawnVehicle",(player,type) => {
 
 
 
-mp.events.add("server:lscLSC:einstellen",(player) => {
+mp.events.add("server:bennys:einstellen",(player) => {
     if (mp.players.exists(player)) {
         getNearestPlayer(player, 2);    
         if (mp.players.exists(currentTarget)) {
             if (currentTarget.data.faction == "Civillian") {
-                gm.mysql.handle.query("UPDATE characters SET faction = 'LSC', factionrang = '1' WHERE id = ?",[currentTarget.data.charId], function (err,res) {
+                gm.mysql.handle.query("UPDATE characters SET faction = 'Bennys', factionrang = '1' WHERE id = ?",[currentTarget.data.charId], function (err,res) {
                     if (err) console.log("Error in Update Faction user: "+err);
                     player.notify("~g~Der Bürger wurde eingestellt");
-                    currentTarget.notify("Sie wurden beim LSC eingestellt!");
-                    currentTarget.data.faction = "LSC";
+                    currentTarget.notify("Sie wurden beim bennys eingestellt!");
+                    currentTarget.data.faction = "Bennys";
                     currentTarget.data.factionDuty = 0;
                     currentTarget.data.factionrang = 1;
                     currentTarget.data.factiondn = 0;
-                    currentTarget.setVariable("faction","LSC");
+                    currentTarget.setVariable("faction","Bennys");
                     gm.mysql.handle.query('SELECT * FROM faction WHERE name = ?', [currentTarget.data.faction], function (error, results, fields) {
                         for(let i = 0; i < results.length; i++) {
                             if(currentTarget.data.faction == results[i].name)
@@ -665,7 +665,7 @@ mp.events.add("server:lscLSC:einstellen",(player) => {
     }        
 });
 
-mp.events.add("server:lsc:parkin",(player,x,y,z) => {
+mp.events.add("server:bennys:parkin",(player,x,y,z) => {
     if (mp.players.exists(player)) {
         const pos = new mp.Vector3(player.position);        
         const veh = getVehicleFromPosition(pos, 2)[0];
