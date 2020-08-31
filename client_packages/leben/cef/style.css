@@ -1,0 +1,48 @@
+	#heal 
+	{
+		position:absolute;
+		left: -0.58%;
+		top:94.8%;
+		margin: 1.12%;
+		margin-left: 2%;
+		width: 6.9%;
+		height: 0.9%;
+		padding:0px;
+		text-align: center;
+		border-style: solid;
+		border-width: 0.3%;
+		border-color: rgba(0, 0, 0, 0.342);
+		float:left;
+		background-color:#0a0a0a54;
+	}
+	#armor 
+	{
+		position:absolute;
+		left: -3.2%;
+		top:94.8%;
+		margin: 1.12%;
+		margin-left: 11.7%;
+		width: 6.9%;
+		height: 0.9%;
+		padding:0px;
+		text-align: center;
+		border-style: solid;
+		border-width: 0.3%;
+		border-color: rgba(0, 0, 0, 0.308);
+		background-color:#0a0a0a4d;
+	}
+	#box, #boxArmor 
+	{
+		background: #1aff0077;
+		width: 100%;
+		height: 100%;
+	}
+	#boxArmor 
+	{
+		background: #0080ff77;
+	}
+	body 
+	{
+        overflow:hidden;
+	}
+	

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>LSCRP Jump</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="/assets/js/prefixfree.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+
+      <canvas id="canvas">
+        Aww, your browser doesn't support HTML5!
+      </canvas>
+
+      <div id="mainMenu">
+        <h1>LSCRP jump</h1>
+        <h3>createt by Ricoouu,</h3>
+
+
+        <p class="info">
+          Benutze
+          <span class="key left">←</span>
+          <span class="key right">→</span>
+          zum bewegen  und space zum (re) start...
+        </p>
+        <a class="button" href="javascript:init()">Play</a>
+      </div>
+
+      <div id="gameOverMenu">
+        <h1>game over!</h1>
+        <h3 id="go_score">Deine scored 0 points</h3>
+
+        <a class="button" href="javascript:reset()">Restart</a>
+      </div>
+
+      <!-- Preloading image ;) -->
+      <img id="sprite" src="http://i.imgur.com/2WEhF.png"/>
+
+      <div id="scoreBoard">
+        <p id="score">0</p>
+      </div>
+
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+﻿<!doctype html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="fonts.css">
+    <style>
+
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            left: 0;
+            right: 0;
+            overflow: hidden;
+        }
+
+        .bg {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ts-status {
+            font-family: "Roboto";
+            font-size: 3vh;
+            color: #FFF;
+            text-align: center;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20%;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="bg">
+
+        <img class="logo" src="" />
+        <div class="ts-status">Teamspeak wurde nicht gefunden.<br />Bitte auf unserem Teamspeak verbinden!</div>
+
+    </div>
+
+    <script src="jquery.js"></script>
+    <script>
+
+        function toggle(status) {
+            $(".bg").animate({
+                opacity: status ? 1 : 0
+            }, 1000);
+        }
+
+        $(function () {
+            toggle(true);
+        });
+
+    </script>
+</body>
+</html>
