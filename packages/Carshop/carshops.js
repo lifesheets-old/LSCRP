@@ -4,7 +4,7 @@ let shop22 = mp.colshapes.newSphere(-742.603,-1325.39,5.00038, 2, 0);           
 let shop23 = mp.colshapes.newSphere(459.3114929199219, -1007.9383544921875, 28.256071090698242, 4, 0);   //LSPD
 let shop24 = mp.colshapes.newSphere(-41.32919692993164, -1674.6556396484375, 29.450660705566406, 4, 0);           //  Schrotthändler
 let shop25 = mp.colshapes.newSphere(289.165, -1161.49, 29.272, 4, 0);
-let shop26 = mp.colshapes.newSphere(296.9086608886719, -601.632568359375, 43.3039665222168, 2, 0);  //Medic
+let shop26 = mp.colshapes.newSphere(1859.8358154296875, 3698.633544921875, 34.26771545410156, 2, 0);  //Medic
 let shop27 = mp.colshapes.newSphere(899.62060546875, -171.4994354248047, 74.07556915283203, 4, 0);  //Taxi
 let shop28 = mp.colshapes.newSphere(-1186.09033203125, -1724.182861328125, 4.38937520980835, 2, 0);  //Exotic cars
 

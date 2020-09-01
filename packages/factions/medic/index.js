@@ -1,8 +1,8 @@
-let duty = mp.colshapes.newSphere(312.22, -597.37, 43.28, 2, 0);
-let clothes = mp.colshapes.newSphere(298.71, -598.82, 43.28, 2, 0);
-let equip = mp.colshapes.newSphere(310.10, -567.97, 43.28, 2, 0);
-let chief = mp.colshapes.newSphere(334.26, -593.61, 43.27, 2, 0);
-let pc = mp.colshapes.newSphere(312.78, -594.49, 43.28, 2, 0);
+let duty = mp.colshapes.newSphere(1834.8856201171875, 3683.97705078125, 34.27003479003906, 2, 0);
+let clothes = mp.colshapes.newSphere(1839.2603759765625, 3689.850341796875, 34.2700309753418, 2, 0);
+let equip = mp.colshapes.newSphere(1836.5341796875, 3690.708251953125, 34.27003860473633, 2, 0);
+let chief = mp.colshapes.newSphere(1834.566650390625, 3687.24560546875, 34.27003860473633, 2, 0);
+let pc = mp.colshapes.newSphere(1837.462646484375, 3682.37353515625, 34.270042419433594, 2, 0);
 //let vehicle = mp.colshapes.newSphere(332.60, -593.93, 43.28, 1, 0);              // Funktion wird nur für den Rollstuhl benutzt !
 //let parkin = mp.colshapes.newSphere(327.21, -603.88, 43.28, 1, 0);                //       ""
 //let heli = mp.colshapes.newSphere(339.275,-589.903,74.1655, 1, 0);                     Deaktiviert
