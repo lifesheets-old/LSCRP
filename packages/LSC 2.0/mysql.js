@@ -10,7 +10,7 @@ module.exports =
             
             host: "mysql.gameserver.gamed.de",
             user: "s1377989",
-            password: "PapaKlauwe20",
+            password: "LSCRPdatenb",
             database: "s1377989",
             connectionLimit: 150  
         });
