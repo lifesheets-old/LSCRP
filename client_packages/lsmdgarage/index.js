@@ -55,12 +55,12 @@ function drawVehicles(vehJSON){
     });
 });
 
-mp.game.ped.createPed(1, 0xFBF98469, 937.98, -970.610, 39.00,1);
+mp.game.ped.createPed(1, 0xFBF98469, 1864.42431640625, 3689.48779296875, 34.26773452758789);
 
 
-mp.markers.new(36, new mp.Vector3(329.14, -557.198, 28.743), 1, 
+mp.markers.new(36, new mp.Vector3(1817.60302734375, 3688.193115234375, 34.22423553466797), 1, 
 	{ 
-		direction: new mp.Vector3(329.14, -557.198, 28.743), 
+		direction: new mp.Vector3(1817.60302734375, 3688.193115234375, 34.22423553466797), 
 		rotation: 0, 
 		color: [ 255, 255, 0, 255],
 		visible: true,

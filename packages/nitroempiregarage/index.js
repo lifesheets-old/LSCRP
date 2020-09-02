@@ -1,4 +1,4 @@
-let impound = mp.colshapes.newSphere(911.9024, -976.999, 39.499, 3, 0);
+let impound = mp.colshapes.newSphere(1178.6820068359375, 2646.259033203125, 37.7948112487793, 3, 0);
 mp.events.add("PushE", (player) => {
   if (mp.players.exists(player)) {
     if(impound.isPointWithin(player.position)) {
@@ -33,8 +33,8 @@ mp.events.add("server:nitroempiregarage:openMenu",(player) => {
 });
 
 mp.events.add("server:nitroempiregarage:parkout",(player,id) => {
-    const one = new mp.Vector3(983.5276489257812, -133.6985321044922, 74.06118774414062, 31);
-    const onehead = 320;
+    const one = new mp.Vector3(1190.0694580078125, 2658.669189453125, 37.828582763671875, 31);
+    const onehead = 120;
     gm.mysql.handle.query("SELECT * FROM vehicles WHERE id = ?",[id],function(err1,res1) {
         if (err1) console.log("Error in Select Vehicles on nitroempiregarage: "+err1);
         if (getVehicleFromPosition(one, 3).length > 0) {
@@ -108,7 +108,7 @@ mp.events.add("server:nitroempiregarage:parkout",(player,id) => {
 });
 
 mp.events.add("server:nitroempiregarage:parkin", (player,id) => {
-        const pos = new mp.Vector3(983.5276489257812, -133.6985321044922, 74.06118774414062);
+        const pos = new mp.Vector3(1190.0694580078125, 2658.669189453125, 37.828582763671875);
         const veh = getVehicleFromPosition(pos, 2)[0];
         if (mp.vehicles.exists(veh)) {
         if (veh === null) {

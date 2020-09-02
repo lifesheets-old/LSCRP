@@ -57,9 +57,9 @@ function drawVehicles(vehJSON){
 
 mp.game.ped.createPed(1, 0xFBF98469, 107.065, 6614.085, 32.004174194336, 225);
 
-mp.markers.new(37, new mp.Vector3(937.98, -970.610, 39.00, 31.2), 1, 
+mp.markers.new(37, new mp.Vector3(1190.0694580078125, 2658.669189453125, 37.828582763671875, 31.2), 1, 
 	{ 
-		direction: new mp.Vector3(937.98, -970.610, 39.00, 31.2), 
+		direction: new mp.Vector3(1190.0694580078125, 2658.669189453125, 37.828582763671875, 31.2), 
 		rotation: 0, 
 		color: [ 0, 0, 255, 153],
 		visible: true,

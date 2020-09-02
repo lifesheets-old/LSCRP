@@ -1,4 +1,4 @@
-let tune = mp.colshapes.newSphere(944.7234497070312, -961.6985473632812, 39.499847412109375, 100, 0);
+let tune = mp.colshapes.newSphere(110.24342346191406, 6627.17822265625, 31.787242889404297, 20, 0);
 
 mp.events.add("F7", (player) => {
   if (mp.players.exists(player)) {
@@ -11,9 +11,9 @@ mp.events.add("F7", (player) => {
 });
 
 
-let pc = mp.colshapes.newSphere(951.3261108398438, -968.5501708984375, 39.506805419921875, 2, 0); //check
-let duty = mp.colshapes.newSphere(948.9705810546875, -966.6741943359375, 39.5068359375, 2, 0); //ckeck
-let clothes = mp.colshapes.newSphere(956.7640380859375, -966.1583251953125, 39.5068359375, 2, 0); //Klamotten
+let pc = mp.colshapes.newSphere(1187.09619140625, 2637.31201171875, 38.40187454223633, 2, 0); //check
+let duty = mp.colshapes.newSphere(1186.6019287109375, 2644.54345703125, 38.40186309814453, 2, 0); //ckeck
+let clothes = mp.colshapes.newSphere(1189.432861328125, 2643.8681640625, 38.40195083618164, 2, 0); //Klamotten
 
 mp.events.add("PushE", (player) => {
     if (mp.players.exists(player)) {

@@ -1,4 +1,4 @@
-let impound = mp.colshapes.newSphere(323.98602294921875, -558.4044799804688, 28.743431091308594, 3, 0);
+let impound = mp.colshapes.newSphere(1822.2430419921875, 3688.45947265625, 34.22426986694336, 3, 0);
 mp.events.add("PushE", (player) => {
   if (mp.players.exists(player)) {
     if(impound.isPointWithin(player.position)) {
@@ -36,8 +36,8 @@ mp.events.add("server:lsmdgarage:openMenu",(player) => {
 
 
 mp.events.add("server:lsmdgarage:parkout",(player,id) => {
-    const one = new mp.Vector3(329.14, -557.198, 28.743);
-    const onehead = -100;
+    const one = new mp.Vector3(1817.60302734375, 3688.193115234375, 34.22423553466797);
+    const onehead = -60;
     gm.mysql.handle.query("SELECT * FROM vehicles WHERE id = ?",[id],function(err1,res1) {
         if (err1) console.log("Error in Select Vehicles on lsmdgarage: "+err1);
         if (getVehicleFromPosition(one, 3).length > 0) {
@@ -107,7 +107,7 @@ mp.events.add("server:lsmdgarage:parkout",(player,id) => {
 });
 
 mp.events.add("server:lsmdgarage:parkin", (player,id) => {
-    const pos = new mp.Vector3(329.14, -557.198, 28.743);
+    const pos = new mp.Vector3(1817.60302734375, 3688.193115234375, 34.22423553466797);
     const veh = getVehicleFromPosition(pos, 2)[0];
     if (mp.vehicles.exists(veh)) {
     if (veh === null) {
