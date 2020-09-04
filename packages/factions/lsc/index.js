@@ -718,3 +718,78 @@ function getNearestVehicle(player, range)
     );
 };
 
+//rechnung ausstellen
+mp.events.add("inputValueShop", (player, trigger, output, text) => {
+    if(mp.players.exists(player)) {
+      if(trigger === "LSCRechnung") {
+        getNearestPlayer(player, 1);      
+        if (mp.players.exists(currentTarget)) {
+            gm.mysql.handle.query("SELECT amount FROM `bank_konten` WHERE ownerId = ?", [currentTarget.data.charId], function (err, res) {
+                if (err) console.log("Error in get Player bank amount at lspd ticket: "+err);
+               gm.mysql.handle.query("SELECT amount FROM `bank_konten` WHERE ownerId = ?", [player.data.charId], function (err1, res1) {
+                  if (err1) console.log("Error in get Player bank amount at staatskonto: "+err1);
+                  if (res.length > 0) {                      
+                  if (parseFloat(res[0].amount) >= parseFloat(output)) {
+                    if(mp.players.exists(currentTarget)) currentTarget.call("client:lsc:requestrechnung",[player,output,res[0].amount,res1[0].amount]);
+                    currentTarget.setVariable("kontoamount",res[0].amount);
+                    player.setVariable("staatskonto", res1[0].amount);                    
+                    player.playAnimation('mp_common', 'givetake2_a', 1, 49);
+                    setTimeout(_ => {
+                      if (mp.players.exists(player)) player.stopAnimation();
+                    }, 2500);
+                  } else {
+                    if(mp.players.exists(player)) player.notify("Die Transaktion wurde wegen zu wenig Geld verweigert!");
+                  }                
+              }
+            });
+          });
+        }
+      }
+    }
+  });
+
+  mp.events.add("server:lsc:payrechnung", (player, cop,amount,accountamount, staatskonto) => {
+    if(mp.players.exists(player) && mp.players.exists(cop)) {
+      var newamount = parseFloat(parseFloat(accountamount) - parseFloat(amount));
+      var staatamout = parseFloat(parseFloat(amount) + parseFloat(staatskonto));
+      player.playAnimation('mp_common', 'givetake2_a', 1, 49);
+      setTimeout(_ => {
+        if (mp.players.exists(player)) player.stopAnimation();
+      }, 2500);
+  
+      gm.mysql.handle.query("UPDATE `bank_konten` SET amount = ? WHERE ownerId = ? AND firma = '0'",[newamount,player.data.charId], function(err, res) {
+        if (err) {
+          console.log("Error in Pay LSPD Ticket Query: "+err);
+          if(mp.players.exists(cop)) cop.notify("Die Banktransaktion wurde technisch abgebrochen.");
+          if(mp.players.exists(player)) player.notify("Die Banktransaktion wurde technisch abgebrochen.");
+        } else {
+          gm.mysql.handle.query("UPDATE bank_konten SET amount = ? WHERE ownerId = ? AND firma = '0'", [staatamout, cop.data.charId], function(err1, res1) {
+            if (err1) console.log("Error in Update Staatskonto: "+err1);
+
+            var bs_timestamp = Math.floor(Date.now() / 1000);
+            var bs_description = cop.data.faction+" Rechnung ("+player.data.firstname+" "+player.data.lastname+")";
+            gm.mysql.handle.query("INSERT INTO bank_statements (fromCharId, toCharId, `date`, category, description, amount) VALUES (?, ?, ?, ?, ?, ?)", [cop.data.charId, player.data.charId, bs_timestamp, "Kartenzahlung", bs_description, "-"+parseFloat(amount)], function(err11, res11) {
+            	if (err11) console.log("Error in Insert Bank Statements: "+err11);
+            });
+
+            gm.mysql.handle.query("INSERT INTO bank_statements (fromCharId, toCharId, `date`, category, description, amount) VALUES (?, ?, ?, ?, ?, ?)", [player.data.charId, cop.data.charId, bs_timestamp, "Kartenzahlung", bs_description, parseFloat(amount)], function(err12, res12) {
+            	if (err12) console.log("Error in Insert Bank Statements: "+err12);
+            });
+          });
+          if(mp.players.exists(cop)) cop.notify("Die Rechnung wurde bezahlt.");
+          if(mp.players.exists(player)) player.notify("Du hast die Rechnung bezahlt.");
+        }
+      });
+    }
+  });
+  mp.events.add("server:lsc:dontPayrechnung", (player, cop) => {
+    if(mp.players.exists(player) && mp.players.exists(cop)) {
+      cop.notify("Die Bezahlung wurde durch die Gegenpartei abgelehnt.");
+      player.notify("Du hast die Bezahlung abgelehnt.");
+      player.playAnimation('mp_common', 'givetake2_a', 1, 49);
+      setTimeout(_ => {
+        if (mp.players.exists(player)) player.stopAnimation();
+      }, 2500);
+    }
+  });
+

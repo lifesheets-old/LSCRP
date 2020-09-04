@@ -35,13 +35,38 @@ mp.events.add("client:bennys:openMainMenu", (factionrang) => {
         mp.events.callRemote("server:bennys:mainMenu",item.Text);
         mainMenuACLS.Close();
       } else {
-        mp.events.call("createInputShop", "Rechnung");
+        mp.events.call("createInputShop", "bennysRechnung");
         mainMenuACLS.Close();
       }          
     });
     mainMenuACLS.MenuClose.on(() => {
       mp.events.callRemote("server:playermenu:variable");
     });    
+});
+
+mp.events.add("sendInputrechnung",(trigger,output) => {
+if (rechnung !== null) {
+  rechnung.destroy();
+  rechnung = null;
+}
+mp.events.callRemote("inputValuerechnung", trigger, output);
+mp.gui.cursor.show(false, false);
+});
+mp.events.add("client:bennys:requestrechnung", (cop, amount, accountamount, staatskonto) => {
+  const   ui_ticket = new Menu("Rechnung bezahlen", "Du sollst "+amount+"$ bezahlen", MenuPoint);
+          ui_ticket.AddItem( new UIMenuItem("Bezahlen", "Bezahle die Rechnung"));
+          ui_ticket.AddItem( new UIMenuItem("Ablehnen", "Die Rechnung nicht bezahlen"));
+          ui_ticket.Visible = true;
+
+  ui_ticket.ItemSelect.on((item, index, value) => {
+      if (item.Text == 'Bezahlen') {
+          mp.events.callRemote("server:bennys:payrechnung",cop,amount,accountamount, staatskonto);
+          ui_ticket.Close();
+      } else if (item.Text == 'Ablehnen') {
+          mp.events.callRemote("server:bennys:dontPayrechnung",cop);
+          ui_ticket.Close();
+      }
+  });
 });
 //Leitstelle
 mp.events.add("client:bennys:createOfficeComputer", (factionrang) => {

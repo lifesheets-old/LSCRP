@@ -46,6 +46,33 @@ mp.events.add("client:pdm:closeMainMenu", () => {
   mainMenujustiz.Close();
 });
 
+
+mp.events.add("sendInputrechnung",(trigger,output) => {
+  if (rechnung !== null) {
+    rechnung.destroy();
+    rechnung = null;
+  }
+  mp.events.callRemote("inputValuerechnung", trigger, output);
+  mp.gui.cursor.show(false, false);
+  });
+  mp.events.add("client:rechnung:requestrechnung", (cop, amount, accountamount, staatskonto) => {
+    const   ui_ticket = new Menu("Rechnung bezahlen", "Du sollst "+amount+"$ bezahlen", MenuPoint);
+            ui_ticket.AddItem( new UIMenuItem("Bezahlen", "Bezahle die Rechnung"));
+            ui_ticket.AddItem( new UIMenuItem("Ablehnen", "Die Rechnung nicht bezahlen"));
+            ui_ticket.Visible = true;
+  
+    ui_ticket.ItemSelect.on((item, index, value) => {
+        if (item.Text == 'Bezahlen') {
+            mp.events.callRemote("server:rechnung:payrechnung",cop,amount,accountamount, staatskonto);
+            ui_ticket.Close();
+        } else if (item.Text == 'Ablehnen') {
+            mp.events.callRemote("server:rechnung:dontPayrechnung",cop);
+            ui_ticket.Close();
+        }
+    });
+  });
+
+
 mp.events.add("client:pdm:createChiefMenu",() => {
   let main = new Menu("Chef PC", "Chef Computer", MenuPoint);
     main.AddItem(new UIMenuItem("Mitarbeiter",""));   

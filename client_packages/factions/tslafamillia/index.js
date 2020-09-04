@@ -34,7 +34,7 @@ mp.events.add("client:tslf:openMainMenu", (factionrang) => {
       mp.events.callRemote("server:tslf:mainMenu",nextMenu, item.Text);
       mainMenujustiz.Close();
     } else {
-      mp.events.call("createInputShop", "Rechnung");
+      mp.events.call("createInputShop", "tslfRechnung");
       mainMenujustiz.Close();
     }    
   });
@@ -46,6 +46,30 @@ mp.events.add("client:tslf:closeMainMenu", () => {
   mainMenujustiz.Close();
 });
 
+mp.events.add("sendInputrechnung",(trigger,output) => {
+  if (rechnung !== null) {
+  rechnung.destroy();
+  rechnung = null;
+  }
+  mp.events.callRemote("inputValuerechnung", trigger, output);
+  mp.gui.cursor.show(false, false);
+  });
+  mp.events.add("client:tslf:requestrechnung", (cop, amount, accountamount, staatskonto) => {
+  const   ui_ticket = new Menu("rechnung bezahlen", "Du sollst "+amount+"$ bezahlen", MenuPoint);
+          ui_ticket.AddItem( new UIMenuItem("Bezahlen", "Bezahle Die rechnung"));
+          ui_ticket.AddItem( new UIMenuItem("Ablehnen", "Die rechnung nicht bezahlen"));
+          ui_ticket.Visible = true;
+  
+  ui_ticket.ItemSelect.on((item, index, value) => {
+      if (item.Text == 'Bezahlen') {
+          mp.events.callRemote("server:tslf:payrechnung",cop,amount,accountamount, staatskonto);
+          ui_ticket.Close();
+      } else if (item.Text == 'Ablehnen') {
+          mp.events.callRemote("server:tslf:dontPayrechnung",cop);
+          ui_ticket.Close();
+      }
+  });
+  });
 
 mp.events.add("client:tslf:createOfficeComputer", (factionrang) => {
   const officeComputer = new Menu("TattooLaFamilia","Computer",MenuPoint);
