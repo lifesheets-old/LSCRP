@@ -69,7 +69,7 @@ mp.events.add("sendInputrechnung",(trigger,output) => {
             ui_ticket.Close();
         }
     });
-  });2
+  });
 
 mp.events.add("client:bike:createChiefMenu",() => {
   let main = new Menu("Chief PC", "Chief Computer", MenuPoint);
