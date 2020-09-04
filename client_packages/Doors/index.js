@@ -28,3 +28,9 @@ mp.keys.bind(0x45, true, () =>
     });
 });
 
+mp.events.add('doorNotify', (message) => {
+    mp.game.ui.setNotificationTextEntry("STRING");
+    mp.game.ui.setNotificationMessage("CHAR_ACTING_UP", "CHAR_ACTING_UP", false, 0, 'Tür-System', message);
+    mp.game.ui.drawNotification(true, false);
+});
+

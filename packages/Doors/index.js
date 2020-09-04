@@ -404,7 +404,7 @@ mp.events.add("getDoors", (player) => {
 });
 
 mp.events.add("checkDoorPermission", (player, door) => {
-  if(mp.players.exists(player)) {
+  if (mp.players.exists(player)) {
     door = JSON.parse(door);
     var check = false;
     if (door.fraktion) {
@@ -412,12 +412,26 @@ mp.events.add("checkDoorPermission", (player, door) => {
         check = true;
       }
     }
+    if (door.fraktion2) {
+      if ((player.data.faction == door.fraktion2)) {
+        check = true;
+      }
+    }
+    if (player.data.adminLvl > 0) {
+      check = true
+    }
+
 
     if (check == true) {
-      door.locked =! doorStates[door.id];
+      door.locked = !doorStates[door.id];
       doorStates[door.id] = door.locked;
       mp.players.call("changeDoorState", [JSON.stringify(door)]);
       mp.players.call("receiveDoors", [JSON.stringify(doors), JSON.stringify(doorStates)]);
+      if (door.locked) {
+        player.call(`doorNotify`, ["~r~Du hast die Tür geschlossen."]);
+      } else {
+        player.call(`doorNotify`, ["~g~Du hast die Tür geöffnet."]);
+      }
     }
   }
 });
