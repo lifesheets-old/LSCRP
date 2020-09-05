@@ -1,7 +1,7 @@
 //Weed
 let farm1 = mp.colshapes.newSphere(2222, 5577, 53, 7, 0);       //check x
 //Koffein
-let farm2 = mp.colshapes.newSphere(1600.11, 1958.5, 94.3939, 10, 0);    // check x 
+let farm2 = mp.colshapes.newSphere(1011.2716674804688, 3096.193115234375, 41.097694396972656, 30, 0);    // check x 
 //Stein
 let farm3 = mp.colshapes.newSphere(2953.18, 2787.56, 41.48, 20, 0);    // check x
 //Muscheln
@@ -25,7 +25,7 @@ let farm13 = mp.colshapes.newSphere(-465.72, 2063.12, 120.94, 15, 0);  // check 
 //Weinfarmen
 let farm14 = mp.colshapes.newSphere(-1762, 2179, 112.90, 25, 0);       //check  x
 //Kokain
-let farm15 = mp.colshapes.newSphere(-893.426, 6040.88, 42.6407, 7, 0);    // check x
+let farm15 = mp.colshapes.newSphere(-391.4090576171875, 895.9900512695312, 232.29981994628906, 15, 0);    // check x
 
 
 mp.events.add("PushE", (player) => {
@@ -64,7 +64,7 @@ mp.events.add("PushE", (player) => {
 
 
 //Weed
-let process1 = mp.colshapes.newSphere(907.177, -1691.86, 43.111, 2, 0);
+let process1 = mp.colshapes.newSphere(1245.919677734375, -2573.752685546875, 43.05973815917969, 2, 0);
 //Koffein
 let process2 = mp.colshapes.newSphere(471.11, 3552.87, 33.23, 2, 0);
 //Stein
@@ -80,7 +80,7 @@ let process8 = mp.colshapes.newSphere(-1440.3778, -106.4799, 50.7975, 2, 0);
 //Eisen
 let process9 = mp.colshapes.newSphere(1896.58, 584.71, 178.398, 2, 0);
 //lsd
-let process10 = mp.colshapes.newSphere(1398.258, 1154.830, 108.145, 2, 0);            
+let process10 = mp.colshapes.newSphere(2462.45654296875, 1567.3458251953125, 32.72029113769531, 2, 0);            
 //�l
 let process11 = mp.colshapes.newSphere(2731.80, 1563.41, 24.5, 2, 0);
 //Gold
@@ -90,7 +90,7 @@ let process13 = mp.colshapes.newSphere(1426, 6337.72, 23.9915, 2, 0);
 //Weinfarm
 let process14 = mp.colshapes.newSphere(-3152.7, 1110.16, 20.8727, 2, 0);
 //Kokain
-let process15 = mp.colshapes.newSphere(1389.09, 3607.27, 38.94, 2, 0);
+let process15 = mp.colshapes.newSphere(1920.2064208984375, 3892.75341796875, 32.65724182128906, 2, 0);
 
 
 
@@ -131,9 +131,9 @@ mp.events.add("PushE", (player) => {
 });
 
 //Weed
-let sell1 = mp.colshapes.newSphere(-1164.984, -1568.1421, 4.4531, 1, 0);
+let sell1 = mp.colshapes.newSphere(-1337.735595703125, -1161.738525390625, 4.509861469268799, 2, 0);
 //Koffein
-let sell2 = mp.colshapes.newSphere(753.51, -3182.89, 7.40, 1, 0);
+let sell2 = mp.colshapes.newSphere(1433.689208984375, 3665.288330078125, 39.72842025756836, 2, 0);
 //Stein
 let sell3 = mp.colshapes.newSphere(109.9, -371.34, 42.4712, 1, 0);
 //Muscheln
@@ -147,7 +147,7 @@ let sell8 = mp.colshapes.newSphere(-654.509, -414.264, 35.401, 1, 0);
 //Eisen
 let sell9 = mp.colshapes.newSphere(-116.044, -1025.38, 27.2736, 1, 0);
 //lsd
-let sell10 = mp.colshapes.newSphere(1284.44, -3348.35, 5.9015, 1, 0);
+let sell10 = mp.colshapes.newSphere(1006.7158813476562, -2880.853759765625, 43.153038024902344, 3, 0);
 //�l
 let sell11 = mp.colshapes.newSphere(-2566.56, 2313.37, 33.21, 1, 0);
 //Gold
