@@ -191,7 +191,7 @@ module.exports =
                                                                             player.model = mp.joaat(modelData.pedHash);
                                                                             player.position = new mp.Vector3(-797.3433227539062, 332.110595703125, 153.8050079345703);
                                                                             player.heading = 268.0709228515625;
-                                                                            player.call('moveSkyCamera', [player, 'up', 1, false]);
+                                                                            //player.call('moveSkyCamera', [player, 'up', 1, false]);
                                                                             player.call("client:characters:selection",[modelData.firstname, modelData.lastname]);         
                         
                         
@@ -395,7 +395,7 @@ mp.events.add("server:login:autologin",(player) => {
                                                                         player.model = mp.joaat(modelData.pedHash);
                                                                         player.position = new mp.Vector3(-797.3433227539062, 332.110595703125, 153.8050079345703);
                                                                         player.heading = 268.0709228515625;
-                                                                        player.call('moveSkyCamera', [player, 'up', 1, false]);
+                                                                        //player.call('moveSkyCamera', [player, 'up', 1, false]);
                                                                         player.call("client:characters:selection",[modelData.firstname, modelData.lastname]);         
                     
                     
@@ -798,7 +798,7 @@ mp.events.add("server:charchooser:menuclick", (player, id) => {
                                         } 
                                     }                                                         
                                     player.call("client:characters:selection",[player.data.firstname, player.data.lastname]);
-                                    player.call('moveSkyCamera', [player, 'up', 1, false]);
+                                    //player.call('moveSkyCamera', [player, 'up', 1, false]);
                                     mp.events.call("server:faction:loadmarker",player);
                                     mp.events.call("server:garage:loadmarker",player);
                                     mp.events.call("server:shop:loadmarker",player);
@@ -819,7 +819,7 @@ mp.events.add("server:charchooser:menuclick", (player, id) => {
                         player.heading = 268.0709228515625;
 
                         player.call("client:characters:selection",[player.data.firstname, player.data.lastname]);
-                        player.call('moveSkyCamera', [player, 'up', 1, false]);
+                        //player.call('moveSkyCamera', [player, 'up', 1, false]);
                         mp.events.call("server:faction:loadmarker",player);
                         mp.events.call("server:garage:loadmarker",player);
                         mp.events.call("server:shop:loadmarker",player);

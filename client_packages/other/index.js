@@ -57,7 +57,7 @@ mp.events.add('render', () => {
   }  */
   mp.game.player.setHealthRechargeMultiplier(0.0);
   var ingameName = player.getVariable("ingameName");
-  mp.discord.update('LSCRP 2.0', ''+ingameName);
+  mp.discord.update('Diversity-Rp', ''+ingameName);
   mp.game.audio.setRadioToStationName("OFF");
   mp.game.audio.setUserRadioControlEnabled(false);  
   if (player.vehicle) {

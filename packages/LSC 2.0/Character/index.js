@@ -185,7 +185,7 @@ mp.events.add("server:characters:selected", (player, slot) => {
         mp.events.call("playerDeath", player);
         player.health = 0;
         player.data.health = 0;
-        player.call('moveSkyCamera', [player, 'up', 1, false]);
+        //player.call('moveSkyCamera', [player, 'up', 1, false]);
       }
       gm.mysql.handle.query("SELECT * FROM phone_contacts WHERE playerCharID = ? ORDER BY contactName asc", [player.data.charId], function (err99, res99) {
         if (err99) console.log("Error in Select Vehicle Keys on Login"+err99);
@@ -297,7 +297,7 @@ mp.events.add("server:characters:selected", (player, slot) => {
       player.call('client:player:joinfreeze-state', [player, true]);
       setTimeout(_ => {
         if (mp.players.exists(player)) {
-          player.call('moveSkyCamera', [player, 'down']);
+          //player.call('moveSkyCamera', [player, 'down']);
         }
       }, 2000);
       setTimeout(_ => {
