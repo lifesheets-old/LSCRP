@@ -22,6 +22,7 @@ let tanke21 = mp.colshapes.newSphere(264,2609,45, 5, 0);  // Harmony
 let tanke22 = mp.colshapes.newSphere(1786,3331,41, 5, 0);  // Grand Senora Airfield
 let tanke23 = mp.colshapes.newSphere(1209,2661,38, 5, 0);  // Sandy, Route 68
 let tanke24 = mp.colshapes.newSphere(-272,-956,145, 15, 0);  //  - -
+let tanke25 = mp.colshapes.newSphere(-1152,-2858,13, 14, 0);  //  - -
 
 
 mp.events.add("PushE", (player) => {
@@ -97,6 +98,9 @@ mp.events.add("PushE", (player) => {
         player.data.mainmenu = true;
     } else if(tanke24.isPointWithin(player.position) && player.data.mainmenu == false) {
         mp.events.call("server:tankstellen:openTanke",player,24);    
+        player.data.mainmenu = true;
+    } else if(tanke25.isPointWithin(player.position) && player.data.mainmenu == false) {
+        mp.events.call("server:tankstellen:openTanke",player,25);    
         player.data.mainmenu = true;
     }     
   }
