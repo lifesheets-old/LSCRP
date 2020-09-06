@@ -70,7 +70,7 @@ mp.events.add("client:tankstellen:tankstellenrob", (posX, posY, posZ) => {
   });
   setTimeout(() => {
     global[tankstellenRob +  "_" + dispatchTime].destroy();
-  }, 300000)
+  }, 0)
   // 300000 = 5 min
   // 600000 = 10 min
 });

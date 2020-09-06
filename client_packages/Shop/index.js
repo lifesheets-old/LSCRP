@@ -80,7 +80,7 @@ mp.events.add("client:shop:shoprob", (posX, posY, posZ) => {
   global[shopRob +  "_" + dispatchTime] = mp.blips.new(60, new mp.Vector3(parseFloat(posX), parseFloat(posY), parseFloat(posZ)),
   {
       name: "Shop Raub",
-      scale: 1.00,
+      scale: 6.00,
       color: 1,
       alpha: 255,
       drawDistance: 10,
@@ -90,7 +90,7 @@ mp.events.add("client:shop:shoprob", (posX, posY, posZ) => {
   });
   setTimeout(() => {
     global[shopRob +  "_" + dispatchTime].destroy();
-  }, 300000)
+  }, 0)
   // 300000 = 5 min
   // 600000 = 10 min
 });

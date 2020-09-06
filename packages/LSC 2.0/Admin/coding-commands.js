@@ -75,6 +75,34 @@ mp.events.addCommand("tp", (player, full, x, y, z) => {                         
         }, 0);     
     });
 });
+mp.events.addCommand("sirene2", (player, full, x, y, z) => {	                  // Alarm + Donnerwetter
+	mp.players.forEach((player) => {
+        var newWeather = "RAIN";
+        gm.weather.currentWeather = newWeather;
+		mp.players.call("client:world:weatherUpdate", [newWeather]);
+		mp.events.call("sqlLog", player, player.data.firstname+" "+player.data.lastname+" hat sierene verwendet."); 
+		//player.call("ShowShardMessage", ["~r~test)"]);               // falls mit TEXT gewünscht, dann aktivieren
+		setTimeout(_ => {
+            if (mp.players.exists(player)) {
+                player.call("weensound");
+            }          
+      }, 0);  
+    });
+  });
+  mp.events.addCommand("sireneaus2", (player, full, x, y, z) => {	            // Sirene aus + klare Sicht
+    mp.players.forEach((player) => {
+        var newWeather = "CLEAR";
+        gm.weather.currentWeather = newWeather;
+		mp.players.call("client:world:weatherUpdate", [newWeather]);
+		mp.events.call("sqlLog", player, player.data.firstname+" "+player.data.lastname+" hat siereneaus verwendet."); 
+		player.call("weensoundoff"); 
+        setTimeout(_ => {
+            var newWeather = "CLEAR";
+          gm.weather.currentWeather = newWeather;
+          mp.players.call("client:world:weatherUpdate", [newWeather]);
+        }, 0);     
+    });
+});
   mp.events.addCommand("neustart", (player, full, x, y, z) => {	        //  Neustart in 5 Min.  -  Einblendung
 	mp.players.forEach((player) => {
         var newWeather = "THUNDER";
