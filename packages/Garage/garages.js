@@ -40,7 +40,7 @@ let garage45 = mp.colshapes.newSphere(1098.46, 2657.93, 38.14, 2, 0);   // Hotel
 let garage46 = mp.colshapes.newSphere(-468.43, 273.19, 83.27, 2, 0);   // Hotel City Vinewood
 let garage47 = mp.colshapes.newSphere(-1462.99, -500.90, 32.96, 2, 0);   // Hotel City  Bahamas .
 let garage48 = mp.colshapes.newSphere(2523.35, -349.02, 94.14, 2, 0);    //  noose 
-let garage49 = mp.colshapes.newSphere(273.86700439453125, -1166.3299560546875, 29.273000717163086, 5, 0);    //  Bike 
+let garage49 = mp.colshapes.newSphere(1214.765380859375, 2730.206298828125, 38.00538635253906, 5, 0);    //  Bike  
 
 
 
@@ -172,7 +172,7 @@ mp.events.add("PushE", (player) => {
     } else if(garage48.isPointWithin(player.position) && player.data.mainmenu == false) {
         player.call("client:garage:openmenu",[48]);    
         player.data.mainmenu = true;
-    } else if(garage49.isPointWithin(player.position) && player.data.mainmenu == false) {
+    } else if(garage49.isPointWithin(player.position) && player.data.mainmenu == false && player.data.faction == "Bike") {
         player.call("client:garage:openmenu",[49]);    
         player.data.mainmenu = true;
     } 

@@ -1,5 +1,5 @@
-let pc = mp.colshapes.newSphere(286.251,-1165.049,29.272, 1, 0);
-let chief = mp.colshapes.newSphere(280.691,-1165,29.272, 1, 0);
+let pc = mp.colshapes.newSphere(1187.1591796875, 2637.3076171875, 38.4018669128418, 1, 0);
+let chief = mp.colshapes.newSphere(9999.1591796875, 99999.3076171875, 999.4018669128418, 1, 0);
 
 mp.events.add("PushE", (player) => {
     if (mp.players.exists(player)) {
