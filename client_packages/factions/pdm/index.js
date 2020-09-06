@@ -34,7 +34,7 @@ mp.events.add("client:pdm:openMainMenu", (factionrang) => {
       mp.events.callRemote("server:pdm:mainMenu",nextMenu, item.Text);
       mainMenujustiz.Close();
     } else {
-      mp.events.call("createInputShop", "Rechnung");
+      mp.events.call("createInputShop", "pdmRechnung");
       mainMenujustiz.Close();
     }    
   });
