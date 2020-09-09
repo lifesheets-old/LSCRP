@@ -20,7 +20,7 @@ let memberMenuLSPD = null;
 mp.events.add("client:lspd:openMainMenu", (factionrang) => {
   mainMenuLSPD = new Menu("LSPD","",MenuPoint);
   mainMenuLSPD.AddItem(new UIMenuItem("Dienstausweis zeigen","Du zeigst deinen Dienstausweis"));
-  mainMenuLSPD.AddItem(new UIMenuItem("Tablet","Aktensystem"));
+  //mainMenuLSPD.AddItem(new UIMenuItem("Tablet","Aktensystem"));
   mainMenuLSPD.AddItem(new UIMenuItem("Dispatches","Liste aller aktiven Dispatches"));
   mainMenuLSPD.AddItem(new UIMenuItem("Leitstellen Telefon geben",""));
   mainMenuLSPD.AddItem(new UIMenuItem("Leitstellen Telefon wegnehmen",""));
