@@ -14,6 +14,7 @@ require('./tslafamillia/index.js');
 require('./taxi/index.js');
 require('./Bahamas/index.js');
 require('./Exotic cars/index.js');
+require('./FIB/fib.js');
 
 
 
@@ -48,6 +49,7 @@ mp.events.add("server:faction:duty", (player) => {
 			else if(player.data.faction === "Taxi") { player.notifyWithPicture("Downtown Cab. Co", "Dienst", "Du bist außer Dienst gegangen!","CHAR_CALL911"); }
 			else if(player.data.faction === "Bennys") { player.notifyWithPicture("Bennys", "Dienst", "Du bist außer Dienst gegangen!","CHAR_CALL911"); }
 			else if(player.data.faction === "LSC") { player.notifyWithPicture("LSC", "Dienst", "Du bist außer Dienst gegangen!","CHAR_CALL911"); }
+			else if(player.data.faction === "FIB") { player.notifyWithPicture("FIB", "Dienst", "Du bist außer Dienst gegangen!","CHAR_CALL911"); }
 			player.data.factionDuty = 0;
 			gm.mysql.handle.query("Select sessionID from characters where id=?;", [player.data.charId], function(errSessionID,resSessionId){
 				if(errSessionID) console.log("Error in get SessionID: "+ errSessionID);
@@ -119,6 +121,7 @@ mp.events.add("server:faction:duty", (player) => {
 			else if(player.data.faction === "Taxi") { player.notifyWithPicture("Downtown Cab. Co", "Dienst", "Du bist in den Dienst gegangen!","CHAR_CALL911"); }
 			else if(player.data.faction === "Bennys") { player.notifyWithPicture("Bennys", "Dienst", "Du bist in den Dienst gegangen!","CHAR_CALL911"); }
 			else if(player.data.faction === "LSC") { player.notifyWithPicture("LSC", "Dienst", "Du bist in den Dienst gegangen!","CHAR_CALL911"); }
+			else if(player.data.faction === "FIB") { player.notifyWithPicture("FIB", "Dienst", "Du bist in den Dienst gegangen!","CHAR_CALL911"); }
 			player.data.factionDuty = 1;
 			gm.mysql.handle.query("Select sessionID from characters where id=?", [player.data.charId], function(errSessionID,resSessionId){
 				var datum = Math.floor(Date.now() / 1000); 
@@ -373,6 +376,10 @@ mp.events.add("inputValueShop", (player, trigger, output, text) => {
 	if (player.data.faction == "Exotic cars" && player.data.mainmenu == false) {
 		player.data.mainmenu = true;
 		player.call("client:ex:openMainMenu",[player.data.factionrang]);
+	}else
+	if (player.data.faction == "FIB" && player.data.mainmenu == false) {
+		player.data.mainmenu = true;
+		player.call("client:fib:openMainMenu",[player.data.factionrang]);
 }
 });
 
