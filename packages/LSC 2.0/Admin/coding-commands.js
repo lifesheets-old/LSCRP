@@ -343,3 +343,7 @@ mp.events.addCommand("car",(player, full, p1, p2, p3) => {
 		if (err) console.log("Error in Create ATM: "+err);
 	});
 });
+
+
+
+
