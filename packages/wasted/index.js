@@ -1,20 +1,18 @@
 const hospitalCoords = [
-    new mp.Vector3(297.2976, -569.599, 44.2608)
+    new mp.Vector3(1826.6370849609375, 3677.449951171875, 34.270057678222656)
 ];
 
 const respawnTime = 300000; // milliseconds
 const spawnTime = 600000; // milliseconds
 
 function respawnAtHospital(player) {
-    if (mp.players.exists(player)) {
-        player.call("client:dead:respawnmenu");
-        player.call("closeDeathscreen");
-        player.call('moveSkyCamera', [player, 'up', 1, false]);
-        player.spawnTimer = setTimeout(respawnGo, spawnTime, player);
+    if (mp.players.exists(player)) {  
+    player.call("client:dead:respawnmenu");
+    player.spawnTimer = setTimeout(respawnGo, spawnTime, player);
     }
 }
 function respawnGo(player) {
-    if (mp.players.exists(player)) {
+    if(mp.players.exists(player)) {
         let closestHospital = 0;
         let minDist = 9999.0;
 
@@ -25,7 +23,6 @@ function respawnGo(player) {
                 closestHospital = i;
                 player.call("closeDeathscreen");
                 player.setVariable("isDead", false);
-                player.call('moveSkyCamera', [player, 'down', 1, false]);
             }
         }
 
@@ -38,33 +35,30 @@ function respawnGo(player) {
         player.health = 100;
         gm.mysql.handle.query("UPDATE characters SET dead = '0', money = '0' WHERE id = ?", [player.data.charId], function(err,res) {
             if (err) console.log("Error in Update Dead: "+err);
-            gm.mysql.handle.query("UPDATE characters SET money = ? WHERE id = ?", [newMoney,player.data.charId], function (err4,res4) {
-                if (err) console.log("Error in Update Dead: "+err);
-                gm.mysql.handle.query("DELETE FROM user_items WHERE charId = ?",[player.data.charId],function(err1,res1) {
-                  if (err1) console.log("Error: "+err1);
-                    gm.mysql.handle.query("UPDATE user_weapons SET taser = '0',pistol = '0',fivepistol = '0',schwerepistol = '0',appistol = '0',smg = '0',pdw = '0',karabiner = '0',taschenlampe = '0',schlagstock = '0',messer = '0',bat = '0',pump = '0' WHERE charId = ?",[player.data.charId],function(err1,res1) {
-                        if (err1) console.log("Error: "+err1);
-                        player.removeWeapon(0x3656C8C1);
-                        player.removeWeapon(0x1B06D571);
-                        player.removeWeapon(0x99AEEB3B);
-                        player.removeWeapon(0xD205520E);
-                        player.removeWeapon(0x22D8FE39);
-                        player.removeWeapon(0x2BE6766B);
-                        player.removeWeapon(0x0A3D4D34);
-                        player.removeWeapon(0x83BF0278);
-                        player.removeWeapon(0x1D073A89);
-                        player.removeWeapon(0x8BB05FD7);    
-                        player.removeWeapon(0x678B81B1);
-                        player.removeWeapon(0x99B507EA);
-                        player.removeWeapon(0x958A4A8F);
-                        clearTimeout(player.spawnTimer);
-                        player.spawnTimer = null;
-                        player.notify("~b~Du wurdest Not Behandelt. Deine Gegenstände sind beim Transport verloren gegangen");
-                    });
-                });            
-            });
-        }); 
-    }
+            gm.mysql.handle.query("DELETE FROM user_items WHERE charId = ?",[player.data.charId],function(err1,res1) {
+                if (err1) console.log("Error: "+err1);
+                gm.mysql.handle.query("UPDATE user_weapons SET taser = '0',pistol = '0',fivepistol = '0',schwerepistol = '0',appistol = '0',smg = '0',pdw = '0',karabiner = '0',taschenlampe = '0',schlagstock = '0',messer = '0',bat = '0',pump = '0' WHERE charId = ?",[player.data.charId],function(err1,res1) {
+                    if (err1) console.log("Error: "+err1);
+                    player.removeWeapon(0x3656C8C1);
+                    player.removeWeapon(0x1B06D571);
+                    player.removeWeapon(0x99AEEB3B);
+                    player.removeWeapon(0xD205520E);
+                    player.removeWeapon(0x22D8FE39);
+                    player.removeWeapon(0x2BE6766B);
+                    player.removeWeapon(0x0A3D4D34);
+                    player.removeWeapon(0x83BF0278);
+                    player.removeWeapon(0x1D073A89);
+                    player.removeWeapon(0x8BB05FD7);    
+                    player.removeWeapon(0x678B81B1);
+                    player.removeWeapon(0x99B507EA);
+                    player.removeWeapon(0x958A4A8F);
+                    clearTimeout(player.spawnTimer);
+                    player.spawnTimer = null;
+                    player.notify("~b~Du wurdest Not Behandelt. Deine Gegenstände sind beim Transport verloren gegangen");
+                });
+            });            
+        });
+    } 
 }
 
 mp.events.add("server:dead:respawn",(player) => {
@@ -78,7 +72,6 @@ mp.events.add("server:dead:respawn",(player) => {
                 minDist = dist;
                 closestHospital = i;
                 player.call("closeDeathscreen");
-                player.call('moveSkyCamera', [player, 'down', 1, false]);
                 player.setVariable("isDead", false);
             }
         }
@@ -88,36 +81,33 @@ mp.events.add("server:dead:respawn",(player) => {
         } else {
             //player.position = new mp.Vector3(-797.3433227539062, 332.110595703125, 153.8050079345703);
         }
-        player.health = 100;
+        player.health = 30;
         gm.mysql.handle.query("UPDATE characters SET dead = '0', money = '0' WHERE id = ?", [player.data.charId], function(err,res) {
             if (err) console.log("Error in Update Dead: "+err);
-            gm.mysql.handle.query("UPDATE characters SET money = ? WHERE id = ?", [newMoney,player.data.charId], function (err4,res4) {
-                if (err) console.log("Error in Update Dead: "+err);
-                gm.mysql.handle.query("DELETE FROM user_items WHERE charId = ?",[player.data.charId],function(err1,res1) {
+            gm.mysql.handle.query("DELETE FROM user_items WHERE charId = ?",[player.data.charId],function(err1,res1) {
+                if (err1) console.log("Error: "+err1);
+                gm.mysql.handle.query("UPDATE user_weapons SET taser = '0',pistol = '0',fivepistol = '0',schwerepistol = '0',appistol = '0',smg = '0',pdw = '0',karabiner = '0',taschenlampe = '0',schlagstock = '0',messer = '0',bat = '0',pump = '0' WHERE charId = ?",[player.data.charId],function(err1,res1) {
                     if (err1) console.log("Error: "+err1);
-                    gm.mysql.handle.query("UPDATE user_weapons SET taser = '0',pistol = '0',fivepistol = '0',schwerepistol = '0',appistol = '0',smg = '0',pdw = '0',karabiner = '0',taschenlampe = '0',schlagstock = '0',messer = '0',bat = '0',pump = '0' WHERE charId = ?",[player.data.charId],function(err1,res1) {
-                        if (err1) console.log("Error: "+err1);
-                        player.removeWeapon(0x3656C8C1);
-                        player.removeWeapon(0x1B06D571);
-                        player.removeWeapon(0x99AEEB3B);
-                        player.removeWeapon(0xD205520E);
-                        player.removeWeapon(0x22D8FE39);
-                        player.removeWeapon(0x2BE6766B);
-                        player.removeWeapon(0x0A3D4D34);
-                        player.removeWeapon(0x83BF0278);
-                        player.removeWeapon(0x1D073A89);
-                        player.removeWeapon(0x8BB05FD7);    
-                        player.removeWeapon(0x678B81B1);
-                        player.removeWeapon(0x99B507EA);
-                        player.removeWeapon(0x958A4A8F);
-                        clearTimeout(player.respawnTimer);
-                        player.respawnTimer = null;
-                        clearTimeout(player.spawnTimer);
-                        player.spawnTimer = null;
-                        player.notify("~b~Du wurdest Not Behandelt. Deine Gegenstände sind beim Transport verloren gegangen");
-                    });
-                });            
-            });
+                    player.removeWeapon(0x3656C8C1);
+                    player.removeWeapon(0x1B06D571);
+                    player.removeWeapon(0x99AEEB3B);
+                    player.removeWeapon(0xD205520E);
+                    player.removeWeapon(0x22D8FE39);
+                    player.removeWeapon(0x2BE6766B);
+                    player.removeWeapon(0x0A3D4D34);
+                    player.removeWeapon(0x83BF0278);
+                    player.removeWeapon(0x1D073A89);
+                    player.removeWeapon(0x8BB05FD7);    
+                    player.removeWeapon(0x678B81B1);
+                    player.removeWeapon(0x99B507EA);
+                    player.removeWeapon(0x958A4A8F);
+                    clearTimeout(player.respawnTimer);
+                    player.respawnTimer = null;
+                    clearTimeout(player.spawnTimer);
+                    player.spawnTimer = null;
+                    player.notify("~b~Du wurdest Not Behandelt. Deine Gegenstände sind beim Transport verloren gegangen");
+                });
+            });            
         });
     }
 });
@@ -126,9 +116,8 @@ mp.events.add("server:dead:waiting",(player) => {
     if(mp.players.exists(player)) {
         if (player.spawnTimer) clearTimeout(player.spawnTimer);
         player.spawnTimer = setTimeout(respawnGo, spawnTime, player);
-        player.call("openDeathscreen");
-        player.call('moveSkyCamera', [player, 'up', 1, false]);
-        //player.call('progress:start', [600, "Du bist bewusstlos"]);
+        //player.call("openDeathscreen");
+        player.call('progress:start', [600, "Du bist bewusstlos"]);
         player.setVariable("isDead", true);
         gm.mysql.handle.query("UPDATE characters SET dead = '1' WHERE id = ?", [player.data.charId], function (err,res) {
             if (err) console.log("Error in Update Dead: "+err);
@@ -153,7 +142,6 @@ mp.events.add("playerDeath", (player,reason,killer) => {
             if (res[0].permaDead == 0) {
                 if (res[0].killerid == killer.data.charId) {
                     player.call("openDeathscreen");
-                    player.call('moveSkyCamera', [player, 'up', 1, false]);
                     player.health = 100;
                     player.data.health = 100;
                     player.setVariable("isDead", 'true');
@@ -167,8 +155,7 @@ mp.events.add("playerDeath", (player,reason,killer) => {
                     if (player.respawnTimer) clearTimeout(player.respawnTimer);
                     player.respawnTimer = setTimeout(respawnAtHospital, respawnTime, player);
                     player.call("openDeathscreen");
-                    player.call('moveSkyCamera', [player, 'up', 1, false]);
-                    //player.call('progress:start', [300, "Du bist bewusstlos"]);
+                    player.call('progress:start', [300, "Du bist bewusstlos"]);
                     player.health = 100;
                     player.data.health = 100;
                     player.setVariable("isDead", 'true');
@@ -176,14 +163,10 @@ mp.events.add("playerDeath", (player,reason,killer) => {
                     player.setVariable("VOICE_RANGE","stumm");
                     gm.mysql.handle.query("UPDATE characters SET dead = '1' WHERE id = ?", [player.data.charId], function (err,res) {
                         if (err) console.log("Error in Update Dead: "+err);
-
-                    });
-
-                                      
+                    });                   
                 } 
             } else {
                 player.call("openDeathscreen");
-                player.call('moveSkyCamera', [player, 'up', 1, false]);
                 player.health = 100;
                 player.data.health = 100;
                 player.setVariable("isDead", 'true');
