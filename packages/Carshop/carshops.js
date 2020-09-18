@@ -1,6 +1,6 @@
 let shop20 = mp.colshapes.newSphere(-42.34,-1092.466,26.422, 2, 0);             //  PDM
 let shop21 = mp.colshapes.newSphere(-1012.17, -2682.12, 13.98, 2, 0);           //  Airport - Fahrradhändler
-let shop22 = mp.colshapes.newSphere(-742.603,-1325.39,5.00038, 2, 0);           //  Boot Händler
+let shop22 = mp.colshapes.newSphere(-743.4840087890625, -1326.27001953125, 5.200379848480225, 4, 0);           //  Boot Händler
 let shop23 = mp.colshapes.newSphere(459.3114929199219, -1007.9383544921875, 28.256071090698242, 4, 0);   //LSPD
 let shop24 = mp.colshapes.newSphere(-41.32919692993164, -1674.6556396484375, 29.450660705566406, 4, 0);           //  Schrotthändler
 let shop25 = mp.colshapes.newSphere(1220.2994384765625, 2726.22705078125, 38.00413513183594, 4, 0);
@@ -14,10 +14,10 @@ mp.events.add("PushE", (player) => {
      if(shop20.isPointWithin(player.position) && player.data.mainmenu == false && player.data.faction == "PDM") {
         mp.events.call("server:carshop:openShop",player,20,"PDM");	   
         player.data.mainmenu = true;
-    } else if(shop21.isPointWithin(player.position) && player.data.mainmenu == false) {
+      } else if(shop21.isPointWithin(player.position) && player.data.mainmenu == false) {
         mp.events.call("server:carshop:openShop",player,21,"Fahrräder");  
         player.data.mainmenu = true;
-    } else if(shop22.isPointWithin(player.position) && player.data.mainmenu == false) {
+      } else if(shop22.isPointWithin(player.position) && player.data.mainmenu == false) {
         mp.events.call("server:carshop:openShop",player,22,"CustomCars");  
         player.data.mainmenu = true;
       }  else if(shop23.isPointWithin(player.position) && player.data.mainmenu == false && player.data.faction == "LSPD" && player.data.factionrang > 10) {
