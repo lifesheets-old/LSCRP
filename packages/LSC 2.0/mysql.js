@@ -9,9 +9,9 @@ module.exports =
         this.handle = mysql.createConnection({
             
             host: "mysql.gameserver.gamed.de",
-            user: "s1377989",
-            password: "LSCRPdatenb",
-            database: "s1377989",
+            user: "s1382509",
+            password: "slatiowiar",
+            database: "s1382509",
             connectionLimit: 150  
         });
 
