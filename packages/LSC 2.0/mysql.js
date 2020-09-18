@@ -91,3 +91,4 @@ mp.events.add("playerJoin", (player) => {
     player.health = 100;
     player.data.charId = null;    
 });
+
