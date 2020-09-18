@@ -1,4 +1,4 @@
-﻿var fleeca_phpURL = "https://diversity-rp.de/fleeca-app.php";
+﻿var fleeca_phpURL = "https://night-rp.de/fleeca-app.php";
 
 var url = new URL(window.location.href);
 var ownerId = String(url.searchParams.get("ownerId"));
