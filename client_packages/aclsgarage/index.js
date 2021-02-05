@@ -13,7 +13,7 @@ const ListItem = NativeUI.ListItem;
 const MenuPoint = new Point(50,50);
 
 function drawVehicles(vehJSON){
-    // Menu für Fahrzeugliste anlegen
+    // nichts für dich Menu für Fahrzeugliste anlegen
     ui_List = new Menu("Impound", "Kunden Fahrzeuge", MenuPoint);
     ui_List.Visible = true;
     if (vehJSON != "none"){
